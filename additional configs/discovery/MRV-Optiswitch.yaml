@@ -1,0 +1,56 @@
+os: MRV-Optiswitch
+text: 'OS for MRV Switches'
+type: network
+icon: mrv
+group: mrv
+mib_dir:
+    - mrv
+over:
+    - { graph: device_bits, text: 'Device Traffic' }
+    - { graph: device_processor, text: 'CPU Usage' }
+    - { graph: device_mempool, text: 'Memory Usage' }
+discovery:
+    - sysObjectID:
+        - .1.3.6.1.4.1.629.22.22
+[qlegius@librenms librenms]$ cat includes/definitions/discovery/MRV-Optiswitch.yaml 
+mib: DEV-ID-MIB:DEV-CFG-MIB
+modules:
+   sensors:
+       state:
+           data:
+               -
+                  oid: nbsDevPSOperStatus
+                  num_oid: .1.3.6.1.4.1.629.1.50.11.1.8.2.1.5.1
+                  index: 'nbsDevPSOperStatus.1'
+                  descr: PSU
+                  states:
+                      - { value: 1, generic: 3, graph: 0, descr: 'null' }
+                      - { value: 2, generic: 0, graph: 0, descr: OK }
+                      - { value: 3, generic: 2, graph: 0, descr: FAIL }
+               -
+                  oid: nbsDevPSOperStatus
+                  num_oid: .1.3.6.1.4.1.629.1.50.11.1.8.2.1.5.2
+                  index: 'nbsDevPSOperStatus.2'
+                  descr: PSU
+                  states:
+                      - { value: 1, generic: 3, graph: 0, descr: 'null' }
+                      - { value: 2, generic: 0, graph: 0, descr: OK }
+                      - { value: 3, generic: 2, graph: 0, descr: FAIL }
+               -
+                  oid: nbsDevFANOperStatus
+                  num_oid: .1.3.6.1.4.1.629.1.50.11.1.11.2.1.5.1
+                  index: 'nbsDevFANOperStatus.1'
+                  descr: Active Fan
+                  states:
+                      - { value: 1, generic: 3, graph: 0, descr: 'null' }
+                      - { value: 2, generic: 0, graph: 0, descr: OK }
+                      - { value: 3, generic: 2, graph: 0, descr: FAIL }
+               -
+                  oid: nbsDevTemperatureMode
+                  num_oid: .1.3.6.1.4.1.629.1.50.11.1.6.1
+                  index: 'nbsDevTemperatureMode.1'
+                  descr: System Temperature
+                  states:
+                      - { value: 1, generic: 3, graph: 0, descr: 'null' }
+                      - { value: 2, generic: 0, graph: 0, descr: NORMAL }
+                      - { value: 3, generic: 2, graph: 0, descr: HIGH }
