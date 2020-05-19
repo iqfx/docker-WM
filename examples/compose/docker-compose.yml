@@ -62,7 +62,7 @@ services:
   librenms:
     image: librenms/librenms:latest
     container_name: librenms
-    domainname: example.com
+    domainname: IQFX-Workstation.ad.iqfx.nl
     hostname: librenms
     ports:
       - target: 8000
@@ -72,7 +72,6 @@ services:
       - db
       - memcached
       - rrdcached
-      - smtp
     volumes:
       - "./librenms:/data"
     env_file:
