@@ -60,7 +60,7 @@ services:
     restart: always
 
   librenms:
-    image: librenms/librenms:latest
+    image: localhost:5000/librenms-wm
     container_name: librenms
     domainname: IQFX-Workstation.ad.iqfx.nl
     hostname: librenms
@@ -88,7 +88,7 @@ services:
     restart: always
 
   dispatcher:
-    image: iqfx/librenms
+    image: librenms/librenms:latest
     container_name: librenms_dispatcher
     domainname: example.com
     hostname: librenms
