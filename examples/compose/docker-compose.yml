@@ -88,7 +88,7 @@ services:
     restart: always
 
   dispatcher:
-    image: librenms/librenms:latest
+    image: iqfx/librenms
     container_name: librenms_dispatcher
     domainname: example.com
     hostname: librenms
