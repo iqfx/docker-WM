@@ -67,6 +67,7 @@ RUN apk --update --no-cache add \
     php7-tokenizer \
     php7-xml \
     php7-zip \
+    php7-pear \
     python \
     py2-pip \
     python3 \
@@ -118,16 +119,20 @@ RUN mkdir -p /opt \
   && echo "foreach (glob(\"/data/config/*.php\") as \$filename) include \$filename;" >> ${LIBRENMS_PATH}/config.php \
   && echo "foreach (glob(\"${LIBRENMS_PATH}/config.d/*.php\") as \$filename) include \$filename;" >> ${LIBRENMS_PATH}/config.php \
   && pip3 install -r ${LIBRENMS_PATH}/requirements.txt \
-  && chown -R nobody.nogroup ${LIBRENMS_PATH} \
   && git clone https://github.com/librenms-plugins/Weathermap.git ${LIBRENMS_PATH}/html/plugins/Weathermap \
-  && chown -R librenms:librenms ${LIBRENMS_PATH}/html/plugins/Weathermap \
-  && chmod 775 ${LIBRENMS_PATH}/html/plugins/Weathermap/configs \
+  && chmod 775 /opt/librenms/html/plugins/Weathermap/configs \
+  && chown -R nobody.nogroup ${LIBRENMS_PATH} \
   && rm -rf ${LIBRENMS_PATH}/.git /tmp/*
 
 COPY rootfs /
 
+
+
 RUN addgroup -g ${PGID} librenms \
   && adduser -D -h ${LIBRENMS_PATH} -u ${PUID} -G librenms -s /bin/sh -D librenms
+RUN chown -R librenms:librenms ${LIBRENMS_PATH}/html/plugins/Weathermap/configs
+
+
 
 EXPOSE 8000 514 514/udp
 WORKDIR ${LIBRENMS_PATH}
