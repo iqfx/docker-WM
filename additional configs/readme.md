@@ -1,6 +1,6 @@
-# YAML files in this folder
+# YAML files in definitions folder
 
-YAML files in this folder are normally located in /opt/librenms/includes/definitions.
+YAML files under the definitions folder are normally located in /opt/librenms/includes/definitions.
 
 # YAML files under the discovery folder
 
